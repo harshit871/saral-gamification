@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { ChevronDown, ChevronUp, Check, Pencil } from "lucide-react"
 import Button from "@/components/ui/Button"
+import HoverTooltip from "@/components/ui/Tooltip"
 import {
   toggleEventDropdown,
   selectEvent,
@@ -35,20 +36,13 @@ export default function EventDropdown() {
     }
   }, [selectedEventId, isEventDropdownOpen, selectedOption?.requiresInput])
 
-  /*
-   * Live display label — updates as the user types.
-   * Shows the formatted label whenever we have enough data,
-   * regardless of whether it's been saved yet.
-   */
+  /* Live display label — updates as user types */
   const displayLabel = (() => {
     if (!selectedOption) return null
 
     if (selectedOption.id === "posts_period") {
       if (eventValue || eventDuration) {
-        return selectedOption.getDisplayLabel(
-          eventValue || "X",
-          eventDuration
-        )
+        return selectedOption.getDisplayLabel(eventValue || "X", eventDuration)
       }
       return selectedOption.label
     }
@@ -64,34 +58,36 @@ export default function EventDropdown() {
     return selectedOption.label
   })()
 
+  /* Positive integer > 0 required for numeric fields */
+  const hasValidValue = eventValue !== "" && Number(eventValue) > 0
+
   /* Can the current selection be saved? */
   const canSave = (() => {
     if (!selectedEventId) return false
     if (!selectedOption?.requiresInput) return true
-    if (selectedOption.inputType === "dollar") return !!eventValue
+    if (selectedOption.inputType === "dollar") return hasValidValue
     if (selectedOption.inputType === "posts_period")
-      return !!eventValue && !!eventDuration
+      return hasValidValue && !!eventDuration
     return true
   })()
 
-  /* Tooltip message for the inline Save button */
+  /* Tooltip for the Save button — shown on hover when disabled */
   const tooltipMsg = (() => {
-    if (!selectedEventId) return null
-    if (selectedOption?.inputType === "dollar" && !eventValue)
+    if (!selectedEventId) return "Select an event to continue"
+    if (selectedOption?.inputType === "dollar" && !hasValidValue)
       return "Enter the sales target amount to continue"
-    if (
-      selectedOption?.inputType === "posts_period" &&
-      (!eventValue || !eventDuration)
-    )
-      return "Enter the count and select a duration to continue"
+    if (selectedOption?.inputType === "posts_period") {
+      if (!hasValidValue && !eventDuration)
+        return "Enter the count and select a duration to continue"
+      if (!hasValidValue) return "Enter a valid post count to continue"
+      if (!eventDuration) return "Select a duration to continue"
+    }
     return null
   })()
 
-  /* Sanitise input — only positive integers */
+  /* Only positive integers allowed */
   const handleNumericInput = (e) => {
-    const raw = e.target.value
-    /* Strip anything that isn't a digit */
-    const sanitised = raw.replace(/[^0-9]/g, "")
+    const sanitised = e.target.value.replace(/[^0-9]/g, "")
     dispatch(setEventValue(sanitised))
   }
 
@@ -121,7 +117,9 @@ export default function EventDropdown() {
         <span className={displayLabel ? "text-text-primary" : "text-text-muted"}>
           {displayLabel || "Select an event"}
         </span>
-        <span className="flex items-center gap-1">
+
+        {/* Right-side icons — edit pencil and chevron share the same slot */}
+        <span className="flex items-center gap-1 shrink-0">
           {isEventSaved && !isEventDropdownOpen && (
             <Pencil
               size={14}
@@ -157,10 +155,13 @@ export default function EventDropdown() {
                   `}
                 >
                   <span>{option.label}</span>
-                  {isSelected && <Check size={16} className="text-brand-500" />}
+                  {/* Checkmark — right-aligned, same position as edit icon */}
+                  <span className="w-4 shrink-0 flex justify-center">
+                    {isSelected && <Check size={16} className="text-brand-500" />}
+                  </span>
                 </button>
 
-                {/* Dollar amount input (Cross $X in sales) */}
+                {/* Dollar input (Cross $X in sales) */}
                 {isSelected && option.inputType === "dollar" && (
                   <div className="px-3 pb-2.5">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
@@ -240,8 +241,8 @@ export default function EventDropdown() {
             )
           })}
 
-          {/* Footer inside dropdown: Cancel + Save */}
-          <div className="relative flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
+          {/* Footer: Cancel + Save with hover tooltip */}
+          <div className="flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
             <Button
               variant="secondary"
               size="sm"
@@ -249,23 +250,17 @@ export default function EventDropdown() {
             >
               Cancel
             </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              disabled={!canSave}
-              onClick={() => dispatch(saveEvent())}
-            >
-              Save
-            </Button>
 
-            {!canSave && tooltipMsg && (
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[calc(100%+8px)] z-50">
-                <div className="relative bg-gray-900 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap shadow-lg">
-                  {tooltipMsg}
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
-                </div>
-              </div>
-            )}
+            <HoverTooltip message={!canSave ? tooltipMsg : null}>
+              <Button
+                variant="primary"
+                size="sm"
+                disabled={!canSave}
+                onClick={() => dispatch(saveEvent())}
+              >
+                Save
+              </Button>
+            </HoverTooltip>
           </div>
         </div>
       )}

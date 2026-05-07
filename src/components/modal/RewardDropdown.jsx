@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { ChevronDown, ChevronUp, Check, Pencil } from "lucide-react"
 import Button from "@/components/ui/Button"
+import HoverTooltip from "@/components/ui/Tooltip"
 import {
   toggleRewardDropdown,
   selectReward,
@@ -28,10 +29,7 @@ export default function RewardDropdown() {
   const selectedOption = REWARD_OPTIONS.find((o) => o.id === selectedRewardId)
   const selectedTier = COMMISSION_TIERS.find((t) => t.id === selectedTierId)
 
-  /*
-   * "Upgrade Commission Tier" is disabled when the event is "is_onboarded".
-   * This mirrors the Figma designs where the option is greyed out.
-   */
+  /* "Upgrade Commission Tier" is disabled for "Is Onboarded" event */
   const isTierDisabled = selectedEventId === "is_onboarded"
 
   useEffect(() => {
@@ -44,9 +42,7 @@ export default function RewardDropdown() {
     }
   }, [selectedRewardId, isRewardDropdownOpen, selectedOption?.inputType])
 
-  /*
-   * Live display label — updates as the user types.
-   */
+  /* Live display label — updates as user types */
   const displayLabel = (() => {
     if (!selectedOption) return null
 
@@ -58,35 +54,34 @@ export default function RewardDropdown() {
       return selectedOption.getDisplayLabel(rewardValue)
     }
 
-    if (selectedOption.inputType === "dollar") {
-      return selectedOption.label
-    }
-
     return selectedOption.label
   })()
 
-  /* Can the current selection be saved? (flat_bonus only — tier has its own flow) */
-  const canSave = selectedRewardId === "flat_bonus" && !!rewardValue
+  /* Positive integer > 0 required */
+  const hasValidValue = rewardValue !== "" && Number(rewardValue) > 0
 
+  /* Can the current selection be saved? (flat_bonus only) */
+  const canSave = selectedRewardId === "flat_bonus" && hasValidValue
+
+  /* Tooltip for the Save button — shown on hover when disabled */
   const tooltipMsg =
-    selectedRewardId === "flat_bonus" && !rewardValue
+    selectedRewardId === "flat_bonus" && !hasValidValue
       ? "Enter the bonus amount to continue"
       : null
 
-  /* Sanitise — only positive integers */
+  /* Only positive integers */
   const handleNumericInput = (e) => {
     const sanitised = e.target.value.replace(/[^0-9]/g, "")
     dispatch(setRewardValue(sanitised))
   }
 
   /*
-   * Always render the section (visible but disabled when event not saved).
-   * This matches the Figma where "Reward with" is shown but non-interactive.
+   * Always render — the component is always visible and interactive.
+   * It's a mandatory field; the Create Reward button stays disabled
+   * until a reward is selected and saved.
    */
-  const isDisabled = !isEventSaved
-
   return (
-    <div className={`relative ${isDisabled ? "opacity-50 pointer-events-none" : ""}`}>
+    <div className="relative">
       <label className="block text-sm font-medium text-text-primary mb-1.5">
         Reward with <span className="text-brand-500">*</span>
       </label>
@@ -95,7 +90,6 @@ export default function RewardDropdown() {
       <button
         id="reward-dropdown-trigger"
         type="button"
-        disabled={isDisabled}
         onClick={() =>
           isRewardSaved
             ? dispatch(editReward())
@@ -103,8 +97,7 @@ export default function RewardDropdown() {
         }
         className={`
           group w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-sm
-          transition-colors duration-150
-          ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}
+          transition-colors duration-150 cursor-pointer
           ${
             isRewardDropdownOpen
               ? "border-brand-500 ring-1 ring-brand-500"
@@ -112,10 +105,11 @@ export default function RewardDropdown() {
           }
         `}
       >
-        <span className={displayLabel && !isDisabled ? "text-text-primary" : "text-text-muted"}>
+        <span className={displayLabel ? "text-text-primary" : "text-text-muted"}>
           {displayLabel || "Select a reward"}
         </span>
-        <span className="flex items-center gap-1">
+
+        <span className="flex items-center gap-1 shrink-0">
           {isRewardSaved && !isRewardDropdownOpen && (
             <Pencil
               size={14}
@@ -159,9 +153,12 @@ export default function RewardDropdown() {
                   `}
                 >
                   <span>{option.label}</span>
-                  {isSelected && !isOptionDisabled && (
-                    <Check size={16} className="text-brand-500" />
-                  )}
+                  {/* Checkmark — fixed-width slot, same position as edit icon */}
+                  <span className="w-4 shrink-0 flex justify-center">
+                    {isSelected && !isOptionDisabled && (
+                      <Check size={16} className="text-brand-500" />
+                    )}
+                  </span>
                 </button>
 
                 {/* Dollar input for flat bonus */}
@@ -187,9 +184,9 @@ export default function RewardDropdown() {
             )
           })}
 
-          {/* Footer: Cancel + Save (only for flat_bonus) */}
+          {/* Footer: Cancel + Save with hover tooltip (flat_bonus only) */}
           {selectedRewardId === "flat_bonus" && (
-            <div className="relative flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
+            <div className="flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
               <Button
                 variant="secondary"
                 size="sm"
@@ -197,23 +194,17 @@ export default function RewardDropdown() {
               >
                 Cancel
               </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                disabled={!canSave}
-                onClick={() => dispatch(saveReward())}
-              >
-                Save
-              </Button>
 
-              {!canSave && tooltipMsg && (
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[calc(100%+8px)] z-50">
-                  <div className="relative bg-gray-900 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap shadow-lg">
-                    {tooltipMsg}
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
-                  </div>
-                </div>
-              )}
+              <HoverTooltip message={!canSave ? tooltipMsg : null}>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  disabled={!canSave}
+                  onClick={() => dispatch(saveReward())}
+                >
+                  Save
+                </Button>
+              </HoverTooltip>
             </div>
           )}
         </div>

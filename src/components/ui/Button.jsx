@@ -25,7 +25,7 @@ export default function Button({
   const variantClasses = VARIANTS[variant] || VARIANTS.primary
   const sizeClasses = SIZES[size] || SIZES.md
   const disabledClasses = disabled
-    ? "opacity-50 cursor-not-allowed pointer-events-none"
+    ? "opacity-50 cursor-not-allowed"
     : ""
 
   return (

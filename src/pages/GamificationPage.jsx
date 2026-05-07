@@ -36,7 +36,7 @@ export default function GamificationPage() {
         <Button
           id="enable-gamification-btn"
           onClick={() => dispatch(openModal())}
-          className="w-full sm:max-w-74"
+          className="w-full md:max-w-74"
         >
           Enable Gamification
         </Button>

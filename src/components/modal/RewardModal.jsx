@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { X } from "lucide-react"
 import Button from "@/components/ui/Button"
-import Tooltip from "@/components/ui/Tooltip"
+import HoverTooltip from "@/components/ui/Tooltip"
 import EventDropdown from "./EventDropdown"
 import RewardDropdown from "./RewardDropdown"
 import TimeBoundToggle from "./TimeBoundToggle"
@@ -26,16 +26,12 @@ export default function RewardModal() {
     showSuccess,
   } = useSelector((state) => state.gamification)
 
-  /* Check if the full form is valid for creation */
   const canCreate =
     isEventSaved && isRewardSaved && (!isTimeBound || endDate)
 
-  /* Tooltip for the Create Reward button */
   const tooltipMessage = useMemo(() => {
-    if (!isEventSaved)
+    if (!isEventSaved || !isRewardSaved)
       return "Choose a reward trigger and a reward to continue"
-    if (!isRewardSaved)
-      return "Choose a reward to continue"
     if (isTimeBound && !endDate)
       return "Choose reward end date to continue"
     return null
@@ -54,12 +50,7 @@ export default function RewardModal() {
         }}
       >
         <div
-          className="
-            bg-white shadow-2xl w-full animate-fade-in
-            rounded-t-2xl md:rounded-xl
-            md:max-w-md md:mx-4
-            flex flex-col min-h-[420px]
-          "
+          className="bg-white shadow-2xl w-full animate-fade-in rounded-t-2xl md:rounded-xl md:max-w-md md:mx-4 flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           <TierSelectView />
@@ -76,13 +67,14 @@ export default function RewardModal() {
         if (e.target === e.currentTarget) dispatch(closeModal())
       }}
     >
+      {/*
+       * Modal container — NO overflow-hidden.
+       * Dropdowns and calendar are absolutely positioned and
+       * render OUTSIDE the modal boundary.
+       */}
       <div
-        className="
-          bg-white shadow-2xl w-full animate-fade-in
-          rounded-t-2xl md:rounded-xl
-          md:max-w-md md:mx-4
-          flex flex-col min-h-[420px]
-        "
+        className="bg-white shadow-2xl w-full animate-fade-in rounded-t-2xl md:rounded-xl md:max-w-md md:mx-4 flex flex-col"
+        style={{ overflow: "visible" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Drag handle — mobile only */}
@@ -104,8 +96,8 @@ export default function RewardModal() {
           </button>
         </div>
 
-        {/* Body — overflow visible so dropdowns render outside */}
-        <div className="px-6 space-y-5 flex-1">
+        {/* Body */}
+        <div className="px-6 space-y-5 flex-1" style={{ overflow: "visible" }}>
           <EventDropdown />
           <RewardDropdown />
 
@@ -117,8 +109,8 @@ export default function RewardModal() {
           )}
         </div>
 
-        {/* Footer — always Cancel + Create Reward */}
-        <div className="relative flex items-center justify-end gap-3 px-6 pt-5 pb-5 shrink-0">
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 px-6 pt-5 pb-5 shrink-0">
           <Button
             id="modal-cancel-btn"
             variant="secondary"
@@ -126,16 +118,17 @@ export default function RewardModal() {
           >
             Cancel
           </Button>
-          <Button
-            id="modal-create-btn"
-            variant="primary"
-            disabled={!canCreate}
-            onClick={() => dispatch(createRewardSuccess())}
-          >
-            Create Reward
-          </Button>
 
-          <Tooltip message={tooltipMessage} visible={!canCreate} />
+          <HoverTooltip message={!canCreate ? tooltipMessage : null}>
+            <Button
+              id="modal-create-btn"
+              variant="primary"
+              disabled={!canCreate}
+              onClick={() => dispatch(createRewardSuccess())}
+            >
+              Create Reward
+            </Button>
+          </HoverTooltip>
         </div>
       </div>
     </div>

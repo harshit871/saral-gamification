@@ -79,9 +79,9 @@ export default function DatePicker() {
         </span>
       </button>
 
-      {/* Calendar dropdown */}
+      {/* Calendar dropdown — opens UPWARD to avoid bottom overflow */}
       {isDatePickerOpen && (
-        <div className="absolute left-0 top-full mt-1 bg-white border border-border rounded-xl shadow-xl z-30 p-4 w-72">
+        <div className="absolute left-0 bottom-full mb-1 bg-white border border-border rounded-xl shadow-xl z-30 p-4 w-72">
           {/* Month navigation */}
           <div className="flex items-center justify-between mb-3">
             <button
