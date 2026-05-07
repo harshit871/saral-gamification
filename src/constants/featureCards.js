@@ -1,4 +1,6 @@
-import { Gift, Crown, Zap } from "lucide-react"
+import Gift from "@/assets/icons/Gift";
+import Crown from "@/assets/icons/Crown";
+import TicketSale from "@/assets/icons/TicketSale";
 
 const FEATURE_CARDS = [
     {
@@ -14,7 +16,7 @@ const FEATURE_CARDS = [
             "Set up custom goals for sales, posts, or time-based achievements",
     },
     {
-        icon: Zap,
+        icon: TicketSale,
         title: "Customise Incentives",
         description:
             "Create custom incentives like flat fees, free products, or special commissions.",
