@@ -26,14 +26,12 @@ const FEATURE_CARDS = [
 
 function FeatureCard({ icon: Icon, title, description }) {
   return (
-    <div className="bg-white rounded-xl border border-border p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
-      <div className="w-14 h-14 rounded-full border-2 border-dashed border-brand-200 flex items-center justify-center mb-4 bg-brand-50">
-        <Icon size={24} className="text-brand-500" />
+    <div className="bg-white rounded-xl border border-border p-5 md:p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
+      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-dashed border-brand-200 flex items-center justify-center mb-3 md:mb-4 bg-brand-50">
+        <Icon size={22} className="text-brand-500" />
       </div>
       <h3 className="text-sm font-semibold text-text-primary mb-1">{title}</h3>
-      <p className="text-xs text-text-secondary leading-relaxed">
-        {description}
-      </p>
+      <p className="text-xs text-text-secondary leading-relaxed">{description}</p>
     </div>
   )
 }
@@ -44,18 +42,18 @@ export default function GamificationPage() {
   return (
     <div className="max-w-3xl mx-auto">
       {/* Hero section */}
-      <div className="relative bg-white rounded-2xl border border-border overflow-hidden mb-8">
-        {/* Decorative dashed borders */}
-        <div className="absolute inset-0 pointer-events-none">
+      <div className="relative bg-white rounded-2xl border border-border overflow-hidden mb-6 md:mb-8">
+        {/* Decorative dashed borders — hidden on very small screens to avoid clutter */}
+        <div className="absolute inset-0 pointer-events-none hidden sm:block">
           <div className="absolute top-6 left-6 w-24 h-20 border-2 border-dashed border-brand-100 rounded-xl" />
           <div className="absolute top-4 right-8 w-20 h-16 border-2 border-dashed border-brand-100 rounded-xl" />
           <div className="absolute top-12 right-24 w-16 h-14 border-2 border-dashed border-brand-200 rounded-xl bg-brand-50/30" />
           <div className="absolute bottom-16 left-10 w-14 h-12 border-2 border-dashed border-brand-100 rounded-xl" />
-          <div className="absolute bottom-8 right-12 w-18 h-14 border-2 border-dashed border-brand-100 rounded-xl" />
+          <div className="absolute bottom-8 right-12 w-16 h-14 border-2 border-dashed border-brand-100 rounded-xl" />
         </div>
 
-        <div className="relative flex flex-col items-center py-16 px-8">
-          <h2 className="text-2xl font-semibold text-text-primary mb-2 italic">
+        <div className="relative flex flex-col items-center py-10 md:py-16 px-6 md:px-8">
+          <h2 className="text-xl md:text-2xl font-semibold text-text-primary mb-2 italic text-center">
             Gamify your Campaign
           </h2>
           <p className="text-sm text-text-secondary mb-6 max-w-xs text-center">
@@ -65,14 +63,15 @@ export default function GamificationPage() {
             id="enable-gamification-btn"
             size="lg"
             onClick={() => dispatch(openModal())}
+            className="w-full sm:w-auto"
           >
             Enable Gamification
           </Button>
         </div>
       </div>
 
-      {/* Feature cards */}
-      <div className="grid grid-cols-3 gap-4">
+      {/* Feature cards — single column on mobile, 3 columns on md+ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {FEATURE_CARDS.map((card) => (
           <FeatureCard key={card.title} {...card} />
         ))}

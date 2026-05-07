@@ -6,7 +6,7 @@ A pixel-perfect implementation of the Saral platform's **Gamification** feature 
 
 ## Live Demo
 
-<!-- > 🔗 **[saral-gamification.vercel.app](https://saral-gamification.vercel.app)** -->
+> 🔗 **[saral-gamification.vercel.app](https://saral-gamification-beta.vercel.app/)**
 
 ---
 

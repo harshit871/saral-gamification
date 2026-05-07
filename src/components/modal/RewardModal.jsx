@@ -118,18 +118,33 @@ export default function RewardModal() {
         : !canCreate
 
   return (
+    /*
+     * Overlay:
+     *   mobile  → items-end so the sheet sticks to the bottom
+     *   md+     → items-center for a centered dialog
+     */
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
       onClick={(e) => {
         if (e.target === e.currentTarget) dispatch(closeModal())
       }}
     >
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 animate-fade-in"
+        className="
+          bg-white shadow-2xl w-full animate-fade-in
+          rounded-t-2xl md:rounded-xl
+          max-h-[90dvh] md:max-w-md md:mx-4
+          flex flex-col overflow-hidden
+        "
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Drag handle — mobile only */}
+        <div className="md:hidden flex justify-center pt-3 pb-1 shrink-0">
+          <div className="w-10 h-1 rounded-full bg-gray-200" />
+        </div>
+
         {/* Header */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-4">
+        <div className="flex items-center justify-between px-6 pt-4 pb-4 shrink-0">
           <h2 className="text-base font-semibold text-text-primary m-0">
             Create your reward system
           </h2>
@@ -142,8 +157,8 @@ export default function RewardModal() {
           </button>
         </div>
 
-        {/* Body */}
-        <div className="px-6 space-y-5">
+        {/* Scrollable body */}
+        <div className="px-6 space-y-5 overflow-y-auto flex-1">
           <EventDropdown />
 
           {/* Reward dropdown — only visible when event is saved */}
@@ -159,7 +174,7 @@ export default function RewardModal() {
         </div>
 
         {/* Footer */}
-        <div className="relative flex items-center justify-end gap-3 px-6 pt-5 pb-5">
+        <div className="relative flex items-center justify-end gap-3 px-6 pt-4 pb-6 md:pb-5 shrink-0 border-t border-border mt-4">
           <Button
             id="modal-cancel-btn"
             variant="secondary"

@@ -2,16 +2,28 @@ import { Bell } from "lucide-react"
 
 export default function TopBar() {
   return (
-    <header className="h-14 bg-white border-b border-border flex items-center justify-between px-6">
-      <h1 className="text-lg font-semibold text-text-primary m-0">
-        Gamification
-      </h1>
+    <header className="h-14 bg-white border-b border-border flex items-center justify-between px-4 md:px-6">
+      {/* Logo mark visible only on mobile (sidebar logo is hidden) */}
+      <div className="flex items-center gap-3">
+        <div className="flex md:hidden items-center gap-2">
+          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+            <span className="text-white text-[10px] font-bold">◆</span>
+          </div>
+          <span className="text-sm font-bold tracking-wide text-text-primary">
+            SATHI
+          </span>
+        </div>
 
-      <div className="flex items-center gap-4">
+        <h1 className="text-base md:text-lg font-semibold text-text-primary m-0">
+          Gamification
+        </h1>
+      </div>
+
+      <div className="flex items-center gap-3">
         {/* Notification bell */}
         <button className="relative p-2 rounded-lg hover:bg-gray-50 transition-colors duration-150">
-          <Bell size={20} className="text-text-secondary" />
-          <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+          <Bell size={18} className="text-text-secondary" />
+          <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
             5
           </span>
         </button>
