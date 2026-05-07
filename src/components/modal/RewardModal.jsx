@@ -8,12 +8,9 @@ import RewardDropdown from "./RewardDropdown"
 import TimeBoundToggle from "./TimeBoundToggle"
 import DatePicker from "./DatePicker"
 import SuccessToast from "./SuccessToast"
-import { EVENT_OPTIONS } from "@/constants/rewardOptions"
-import { REWARD_OPTIONS } from "@/constants/rewardOptions"
+import TierSelectView from "./TierSelectView"
 import {
   closeModal,
-  saveEvent,
-  saveReward,
   createRewardSuccess,
 } from "@/store/gamificationSlice"
 
@@ -21,108 +18,58 @@ export default function RewardModal() {
   const dispatch = useDispatch()
   const {
     isModalOpen,
-    selectedEventId,
-    eventValue,
-    isEventDropdownOpen,
+    modalView,
     isEventSaved,
-    selectedRewardId,
-    rewardValue,
-    isRewardDropdownOpen,
     isRewardSaved,
     isTimeBound,
     endDate,
     showSuccess,
   } = useSelector((state) => state.gamification)
 
-  const selectedEvent = EVENT_OPTIONS.find((o) => o.id === selectedEventId)
-  const selectedReward = REWARD_OPTIONS.find((o) => o.id === selectedRewardId)
-
-  /* Determine which phase we're in for button/tooltip logic */
-  const phase = useMemo(() => {
-    if (!isEventSaved) return "event"
-    if (!isRewardSaved) return "reward"
-    return "final"
-  }, [isEventSaved, isRewardSaved])
-
-  /* Check if current event selection can be saved */
-  const canSaveEvent =
-    selectedEventId &&
-    (!selectedEvent?.requiresInput || (selectedEvent?.requiresInput && eventValue))
-
-  /* Check if current reward selection can be saved */
-  const canSaveReward =
-    selectedRewardId &&
-    (!selectedReward?.requiresInput ||
-      (selectedReward?.requiresInput && rewardValue))
-
   /* Check if the full form is valid for creation */
   const canCreate =
     isEventSaved && isRewardSaved && (!isTimeBound || endDate)
 
-  /* Tooltip message */
+  /* Tooltip for the Create Reward button */
   const tooltipMessage = useMemo(() => {
-    if (phase === "event") {
-      if (!selectedEventId) return "Choose a reward trigger and a reward to continue"
-      if (selectedEvent?.requiresInput && !eventValue)
-        return "Enter the sales target amount to continue"
-      return null
-    }
-    if (phase === "reward") {
-      if (!selectedRewardId) return "Choose a reward to continue"
-      if (selectedReward?.requiresInput && !rewardValue)
-        return "Enter the reward amount to continue"
-      return null
-    }
-    if (phase === "final" && isTimeBound && !endDate) {
+    if (!isEventSaved)
+      return "Choose a reward trigger and a reward to continue"
+    if (!isRewardSaved)
+      return "Choose a reward to continue"
+    if (isTimeBound && !endDate)
       return "Choose reward end date to continue"
-    }
     return null
-  }, [
-    phase,
-    selectedEventId,
-    selectedEvent,
-    eventValue,
-    selectedRewardId,
-    selectedReward,
-    rewardValue,
-    isTimeBound,
-    endDate,
-  ])
+  }, [isEventSaved, isRewardSaved, isTimeBound, endDate])
 
   if (!isModalOpen) return null
   if (showSuccess) return <SuccessToast />
 
-  /* Determine primary action */
-  const handlePrimaryAction = () => {
-    if (phase === "event" && canSaveEvent) {
-      dispatch(saveEvent())
-    } else if (phase === "reward" && canSaveReward) {
-      dispatch(saveReward())
-    } else if (phase === "final" && canCreate) {
-      dispatch(createRewardSuccess())
-    }
+  /* ── Tier select view ── */
+  if (modalView === "tier_select") {
+    return (
+      <div
+        className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) dispatch(closeModal())
+        }}
+      >
+        <div
+          className="
+            bg-white shadow-2xl w-full animate-fade-in
+            rounded-t-2xl md:rounded-xl
+            md:max-w-md md:mx-4
+            flex flex-col min-h-[420px]
+          "
+          onClick={(e) => e.stopPropagation()}
+        >
+          <TierSelectView />
+        </div>
+      </div>
+    )
   }
 
-  const primaryLabel =
-    phase === "event"
-      ? "Save"
-      : phase === "reward"
-        ? "Save"
-        : "Create Reward"
-
-  const isPrimaryDisabled =
-    phase === "event"
-      ? !canSaveEvent
-      : phase === "reward"
-        ? !canSaveReward
-        : !canCreate
-
+  /* ── Main view ── */
   return (
-    /*
-     * Overlay:
-     *   mobile  → items-end so the sheet sticks to the bottom
-     *   md+     → items-center for a centered dialog
-     */
     <div
       className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
       onClick={(e) => {
@@ -133,8 +80,8 @@ export default function RewardModal() {
         className="
           bg-white shadow-2xl w-full animate-fade-in
           rounded-t-2xl md:rounded-xl
-          max-h-[90dvh] md:max-w-md md:mx-4
-          flex flex-col overflow-hidden
+          md:max-w-md md:mx-4
+          flex flex-col min-h-[420px]
         "
         onClick={(e) => e.stopPropagation()}
       >
@@ -144,7 +91,7 @@ export default function RewardModal() {
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 pt-4 pb-4 shrink-0">
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
           <h2 className="text-base font-semibold text-text-primary m-0">
             Create your reward system
           </h2>
@@ -157,14 +104,11 @@ export default function RewardModal() {
           </button>
         </div>
 
-        {/* Scrollable body */}
-        <div className="px-6 space-y-5 overflow-y-auto flex-1">
+        {/* Body — overflow visible so dropdowns render outside */}
+        <div className="px-6 space-y-5 flex-1">
           <EventDropdown />
-
-          {/* Reward dropdown — only visible when event is saved */}
           <RewardDropdown />
 
-          {/* Time-bound section — only when event and reward are saved */}
           {isRewardSaved && (
             <>
               <TimeBoundToggle />
@@ -173,8 +117,8 @@ export default function RewardModal() {
           )}
         </div>
 
-        {/* Footer */}
-        <div className="relative flex items-center justify-end gap-3 px-6 pt-4 pb-6 md:pb-5 shrink-0 border-t border-border mt-4">
+        {/* Footer — always Cancel + Create Reward */}
+        <div className="relative flex items-center justify-end gap-3 px-6 pt-5 pb-5 shrink-0">
           <Button
             id="modal-cancel-btn"
             variant="secondary"
@@ -183,15 +127,15 @@ export default function RewardModal() {
             Cancel
           </Button>
           <Button
-            id="modal-primary-btn"
+            id="modal-create-btn"
             variant="primary"
-            disabled={isPrimaryDisabled}
-            onClick={handlePrimaryAction}
+            disabled={!canCreate}
+            onClick={() => dispatch(createRewardSuccess())}
           >
-            {primaryLabel}
+            Create Reward
           </Button>
 
-          <Tooltip message={tooltipMessage} visible={isPrimaryDisabled} />
+          <Tooltip message={tooltipMessage} visible={!canCreate} />
         </div>
       </div>
     </div>
