@@ -1,4 +1,5 @@
 import NAV_ITEMS from "@/constants/navitems";
+import Profile from "@/assets/icons/Profile";
 
 function SideNavItem({ icon: Icon, label, active }) {
   return (
@@ -6,15 +7,15 @@ function SideNavItem({ icon: Icon, label, active }) {
       <a
         href="#"
         className={`
-          flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium
+          flex items-center gap-2 p-2 rounded-lg text-sm font-medium
           transition-colors duration-150
           ${active
-            ? "text-brand-500 bg-brand-50 border-brand-500"
+            ? "text-brand-500 bg-brand-50"
             : "text-text-secondary hover:text-text-primary hover:bg-gray-50"
           }
         `}
       >
-        <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
+        <Icon />
         <span>{label}</span>
       </a>
     </li>
@@ -41,19 +42,19 @@ export default function Sidebar() {
   return (
     <>
       {/* ── Desktop: fixed left sidebar (md+) ── */}
-      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-52 bg-white border-r border-border flex-col z-30">
+      <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-52 flex-col p-4 z-30">
         {/* Logo */}
-        <div className="px-5 py-5 flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+        <div className="flex items-center gap-2 px-2">
+          <div className="w-7 h-7 rounded-lg bg-linear-to-br from-red-500 to-pink-500 flex items-center justify-center">
             <span className="text-white text-xs font-bold">◆</span>
           </div>
           <span className="text-base font-bold tracking-wide text-text-primary">
-            SATHI
+            SARAL
           </span>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 mt-2">
+        <nav className="flex-1 mt-6">
           <ul className="space-y-1 list-none p-0 m-0">
             {NAV_ITEMS.map((item) => (
               <SideNavItem key={item.label} {...item} />
@@ -62,15 +63,13 @@ export default function Sidebar() {
         </nav>
 
         {/* Settings */}
-        <div className="px-3 pb-5">
           <a
             href="#"
-            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-gray-50 transition-colors duration-150"
+            className="flex items-center gap-2 p-2 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-gray-50 transition-colors duration-150"
           >
-            <Settings size={18} strokeWidth={1.8} />
+            <Profile />
             <span>Settings</span>
           </a>
-        </div>
       </aside>
 
       {/* ── Mobile: fixed bottom nav bar (< md) ── */}
@@ -78,7 +77,7 @@ export default function Sidebar() {
         {NAV_ITEMS.map((item) => (
           <BottomNavItem key={item.label} {...item} />
         ))}
-        <BottomNavItem icon={Settings} label="Settings" active={false} />
+        <BottomNavItem icon={Profile} label="Settings" active={false} />
       </nav>
     </>
   )

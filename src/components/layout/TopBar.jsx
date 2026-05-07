@@ -2,15 +2,15 @@ import { Bell } from "lucide-react"
 
 export default function TopBar() {
   return (
-    <header className="h-14 bg-white border-b border-border flex items-center justify-between px-4 md:px-6">
+    <header className="h-14 border-b border-border flex items-center justify-around px-4 md:px-6">
       {/* Logo mark visible only on mobile (sidebar logo is hidden) */}
       <div className="flex items-center gap-3">
         <div className="flex md:hidden items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+          <div className="w-6 h-6 rounded-md bg-linear-to-br from-red-500 to-pink-500 flex items-center justify-center">
             <span className="text-white text-[10px] font-bold">◆</span>
           </div>
           <span className="text-sm font-bold tracking-wide text-text-primary">
-            SATHI
+            SARAL
           </span>
         </div>
 

@@ -3,12 +3,12 @@
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  --color-brand-50: #fdf4ff;
+  --color-brand-50: #fffdff;
   --color-brand-100: #fae8ff;
   --color-brand-200: #f5d0fe;
   --color-brand-300: #f0abfc;
   --color-brand-400: #e879f9;
-  --color-brand-500: #d946ef;
+  --color-brand-500: #C530C5;
   --color-brand-600: #c026d3;
   --color-brand-700: #a21caf;
 
@@ -16,13 +16,14 @@
   --color-surface-secondary: #faf5ff;
   --color-surface-overlay: rgba(0, 0, 0, 0.4);
 
-  --color-border: #e5e7eb;
+  --color-border: #fee7fe;
   --color-border-dashed: #e9d5ff;
 
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #6b7280;
+  --color-text-primary: #303030;
+  --color-text-secondary: #616161;
   --color-text-muted: #9ca3af;
 
+  --color-magenta: #561056;
   --color-success: #10b981;
 }
 
@@ -49,9 +50,11 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
   border-radius: 3px;
@@ -63,6 +66,7 @@ body {
     opacity: 0;
     transform: scale(0.95) translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -71,4 +75,11 @@ body {
 
 @utility animate-fade-in {
   animation: fade-in 0.2s ease-out;
+}
+
+.gamifyBg {
+    background-image: url('@/assets/gamify-bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
 }
