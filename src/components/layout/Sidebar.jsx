@@ -1,21 +1,5 @@
-import {
-  Home,
-  BarChart3,
-  Gamepad2,
-  LayoutGrid,
-  CreditCard,
-  Settings,
-} from "lucide-react"
+import NAV_ITEMS from "@/constants/navitems";
 
-const NAV_ITEMS = [
-  { icon: Home, label: "Home" },
-  { icon: BarChart3, label: "Insights" },
-  { icon: Gamepad2, label: "Gamification", active: true },
-  { icon: LayoutGrid, label: "Applications" },
-  { icon: CreditCard, label: "Payments" },
-]
-
-/* ── Desktop side-nav item ────────────────────────────── */
 function SideNavItem({ icon: Icon, label, active }) {
   return (
     <li>
@@ -24,10 +8,9 @@ function SideNavItem({ icon: Icon, label, active }) {
         className={`
           flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium
           transition-colors duration-150
-          ${
-            active
-              ? "text-brand-500 bg-brand-50 border-l-3 border-brand-500"
-              : "text-text-secondary hover:text-text-primary hover:bg-gray-50"
+          ${active
+            ? "text-brand-500 bg-brand-50 border-brand-500"
+            : "text-text-secondary hover:text-text-primary hover:bg-gray-50"
           }
         `}
       >
@@ -38,7 +21,6 @@ function SideNavItem({ icon: Icon, label, active }) {
   )
 }
 
-/* ── Mobile bottom-nav item ───────────────────────────── */
 function BottomNavItem({ icon: Icon, label, active }) {
   return (
     <a
