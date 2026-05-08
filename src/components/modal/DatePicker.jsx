@@ -130,7 +130,7 @@ export default function DatePicker() {
                   onClick={() => handleSelectDate(day)}
                   disabled={isDisabled}
                   className={`
-                    h-8 w-8 mx-auto rounded-full text-xs flex items-center justify-center
+                    h-8 w-8 mx-auto rounded-md text-xs flex items-center justify-center
                     transition-colors duration-100
                     ${!isCurrentMonth ? "text-gray-300" : ""}
                     ${isDisabled ? "text-gray-300 cursor-not-allowed" : "cursor-pointer hover:bg-brand-50"}

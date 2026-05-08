@@ -96,7 +96,7 @@ export default function TierSelectView() {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-end gap-3 px-6 pt-5 pb-5 shrink-0">
+      <div className="grid grid-cols-2 gap-3 px-6 pt-5 pb-5 shrink-0">
         <Button
           variant="secondary"
           onClick={() => dispatch(goBackFromTierSelect())}
