@@ -84,7 +84,7 @@ export default function RewardModal() {
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
-          <h2 className="text-base font-semibold text-text-primary m-0">
+          <h2 className="text-xl font-medium text-text-primary m-0">
             Create your reward system
           </h2>
           <button
@@ -101,12 +101,9 @@ export default function RewardModal() {
           <EventDropdown />
           <RewardDropdown />
 
-          {isRewardSaved && (
-            <>
-              <TimeBoundToggle />
-              <DatePicker />
-            </>
-          )}
+
+          <TimeBoundToggle />
+          <DatePicker />
         </div>
 
         {/* Footer */}

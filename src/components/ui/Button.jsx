@@ -21,7 +21,7 @@ export default function Button({
   ...props
 }) {
   const baseClasses =
-    "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 cursor-pointer select-none"
+    "inline-flex items-center justify-center rounded-lg transition-all duration-200 cursor-pointer select-none"
   const variantClasses = VARIANTS[variant] || VARIANTS.primary
   const sizeClasses = SIZES[size] || SIZES.md
   const disabledClasses = disabled

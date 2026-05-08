@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { CheckCircle } from "lucide-react"
 import { dismissSuccess } from "@/store/gamificationSlice"
+import SuccessCheckIcon from "@/assets/icons/Success"
 
 export default function SuccessToast() {
   const dispatch = useDispatch()
@@ -14,10 +14,11 @@ export default function SuccessToast() {
   }, [dispatch])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 pointer-events-none">
-      <div className="bg-white rounded-xl shadow-2xl border border-border px-6 py-4 flex items-center gap-3 animate-fade-in pointer-events-auto">
-        <CheckCircle size={24} className="text-success shrink-0" />
-        <span className="text-sm font-semibold text-text-primary">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 pointer-events-none">
+      <div className="bg-text-primary rounded-2xl px-2.5 py-2 flex items-center gap-1 animate-fade-in pointer-events-auto">
+        <SuccessCheckIcon className="text-success shrink-0" width="26" height="26" />
+
+        <span className="text-white text-base">
           Reward Created!
         </span>
       </div>

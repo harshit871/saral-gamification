@@ -12,7 +12,7 @@ export default function TimeBoundToggle() {
         <p className="text-sm font-medium text-text-primary">
           Make the reward time bound
         </p>
-        <p className="text-xs text-text-muted mt-0.5">
+        <p className="text-xs text-text-secondary mt-0.5">
           Choose an end date to stop this reward automatically.
         </p>
       </div>

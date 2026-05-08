@@ -82,7 +82,7 @@ export default function RewardDropdown() {
    */
   return (
     <div className="relative">
-      <label className="block text-sm font-medium text-text-primary mb-1.5">
+      <label className="block text-sm text-text-primary mb-1.5">
         Reward with <span className="text-brand-500">*</span>
       </label>
 
@@ -186,7 +186,7 @@ export default function RewardDropdown() {
 
           {/* Footer: Cancel + Save with hover tooltip (flat_bonus only) */}
           {selectedRewardId === "flat_bonus" && (
-            <div className="flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
+            <div className="grid grid-cols-2 gap-3 px-3 py-3 border-t border-border">
               <Button
                 variant="secondary"
                 size="sm"
@@ -201,6 +201,7 @@ export default function RewardDropdown() {
                   size="sm"
                   disabled={!canSave}
                   onClick={() => dispatch(saveReward())}
+                  className="w-full"
                 >
                   Save
                 </Button>

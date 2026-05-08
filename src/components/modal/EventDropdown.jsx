@@ -93,7 +93,7 @@ export default function EventDropdown() {
 
   return (
     <div className="relative">
-      <label className="block text-sm font-medium text-text-primary mb-1.5">
+      <label className="block text-sm text-text-primary mb-1.5">
         Reward event <span className="text-brand-500">*</span>
       </label>
 
@@ -242,7 +242,7 @@ export default function EventDropdown() {
           })}
 
           {/* Footer: Cancel + Save with hover tooltip */}
-          <div className="flex items-center justify-end gap-3 px-3 py-3 border-t border-border">
+          <div className="grid grid-cols-2 gap-3 px-3 py-3 border-t border-border">
             <Button
               variant="secondary"
               size="sm"
@@ -257,6 +257,7 @@ export default function EventDropdown() {
                 size="sm"
                 disabled={!canSave}
                 onClick={() => dispatch(saveEvent())}
+                className="w-full"
               >
                 Save
               </Button>
