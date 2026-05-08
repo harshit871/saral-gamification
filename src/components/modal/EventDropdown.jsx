@@ -121,9 +121,9 @@ export default function EventDropdown() {
             />
           )}
           {isEventDropdownOpen ? (
-            <ChevronUp size={16} className="text-text-muted" />
+            <ChevronUp size={20} className="text-text-muted" />
           ) : (
-            <ChevronDown size={16} className="text-text-muted" />
+            <ChevronDown size={20} className="text-text-muted" />
           )}
         </span>
       </button>
@@ -174,7 +174,7 @@ export default function EventDropdown() {
                 )}
 
                 {isSelected && option.inputType === "posts_period" && (
-                  <div className="px-3 pb-2.5 grid grid-cols-2 gap-2">
+                  <div className="px-3 pb-2.5 grid grid-cols-2 gap-2 mt-1">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
                       <input
                         ref={inputRef}
@@ -207,7 +207,7 @@ export default function EventDropdown() {
                         >
                           {selectedDuration?.label || "Select duration"}
                         </span>
-                        <ChevronDown size={14} className="text-text-muted" />
+                        <ChevronDown size={20} className="text-text-muted" />
                       </button>
 
                       {isDurationDropdownOpen && (

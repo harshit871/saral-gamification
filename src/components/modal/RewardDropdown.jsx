@@ -106,9 +106,9 @@ export default function RewardDropdown() {
             />
           )}
           {isRewardDropdownOpen ? (
-            <ChevronUp size={16} className="text-text-muted" />
+            <ChevronUp size={20} className="text-text-muted" />
           ) : (
-            <ChevronDown size={16} className="text-text-muted" />
+            <ChevronDown size={20} className="text-text-muted" />
           )}
         </span>
       </button>

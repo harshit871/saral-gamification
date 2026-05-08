@@ -56,9 +56,9 @@ export default function TierSelectView() {
               {selectedTier?.label || "Select a tier"}
             </span>
             {isDropdownOpen ? (
-              <ChevronUp size={16} className="text-text-muted" />
+              <ChevronUp size={20} className="text-text-muted" />
             ) : (
-              <ChevronDown size={16} className="text-text-muted" />
+              <ChevronDown size={20} className="text-text-muted" />
             )}
           </button>
 
@@ -77,7 +77,7 @@ export default function TierSelectView() {
                     text-base leading-[1.4]
                     ${
                       selectedTierId === tier.id
-                        ? "text-brand-500 bg-brand-50/50"
+                        ? "text-brand-500 bg-brand-700"
                         : "text-text-primary hover:bg-gray-50"
                     }
                   `}

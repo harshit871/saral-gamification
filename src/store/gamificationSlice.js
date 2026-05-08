@@ -121,9 +121,11 @@ const gamificationSlice = createSlice({
       }
     },
     selectReward(state, action) {
+      if (state.selectedRewardId !== action.payload) {
+        state.rewardValue = ""
+        state.selectedTierId = null
+      }
       state.selectedRewardId = action.payload
-      state.rewardValue = ""
-      state.selectedTierId = null
       state.isRewardSaved = false
 
       if (action.payload === "upgrade_commission") {
