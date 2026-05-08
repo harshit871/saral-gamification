@@ -8,7 +8,7 @@ export default function TimeBoundToggle() {
 
   return (
     <div className="flex items-start justify-between gap-4">
-      <div>
+      <div onClick={() => dispatch(toggleTimeBound())}>
         <p className="text-sm font-medium text-text-primary">
           Make the reward time bound
         </p>

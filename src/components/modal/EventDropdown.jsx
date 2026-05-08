@@ -146,10 +146,10 @@ export default function EventDropdown() {
                   onClick={() => dispatch(selectEvent(option.id))}
                   className={`
                     w-full flex items-center justify-between px-3 py-2.5 text-sm text-left
-                    transition-colors duration-100 cursor-pointer
+                    transition-colors duration-100 cursor-pointer rounded-lg
                     ${
                       isSelected
-                        ? "text-brand-500 bg-brand-50/50"
+                        ? "text-brand-500 bg-brand-700"
                         : "text-text-primary hover:bg-gray-50"
                     }
                   `}
@@ -163,7 +163,7 @@ export default function EventDropdown() {
 
                 {/* Dollar input (Cross $X in sales) */}
                 {isSelected && option.inputType === "dollar" && (
-                  <div className="px-3 pb-2.5">
+                  <div className="my-1">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
                       <span className="pl-3 pr-1 text-sm text-text-secondary">
                         {option.inputPrefix}
