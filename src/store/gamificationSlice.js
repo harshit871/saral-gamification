@@ -35,6 +35,9 @@ const gamificationSlice = createSlice({
   initialState,
   reducers: {
     openModal(state) {
+      if (state.showSuccess) {
+        return { ...initialState, isModalOpen: true }
+      }
       state.isModalOpen = true
     },
     closeModal() {

@@ -7,3 +7,5 @@ export const TABS = [
 ];
 
 export const MAX_LENGTH_INPUT_ALLOWED = 15;
+
+export const TOAST_TIMEOUT_TIME_IN_MS = 2500;

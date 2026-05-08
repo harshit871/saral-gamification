@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { dismissSuccess } from "@/store/gamificationSlice"
 import SuccessCheckIcon from "@/assets/icons/Success"
+import { TOAST_TIMEOUT_TIME_IN_MS } from "@/constants/miscellaneous"
 
 export default function SuccessToast() {
   const dispatch = useDispatch()
@@ -9,7 +10,7 @@ export default function SuccessToast() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(dismissSuccess())
-    }, 1500)
+    }, TOAST_TIMEOUT_TIME_IN_MS)
     return () => clearTimeout(timer)
   }, [dispatch])
 
