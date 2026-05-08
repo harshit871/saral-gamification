@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux"
 import {
   ArrowLeft,
   ArrowRight,
-  CalendarDays,
 } from "lucide-react"
+import CalendarIcon from "@/assets/icons/Calendar";
 import Button from "@/components/ui/Button"
 import { toggleDatePicker, setEndDate } from "@/store/gamificationSlice"
 import {
@@ -53,7 +53,7 @@ export default function DatePicker() {
 
   return (
     <div className="relative mt-3">
-      
+
       <button
         id="date-picker-trigger"
         type="button"
@@ -69,7 +69,7 @@ export default function DatePicker() {
           }
         `}
       >
-        <CalendarDays size={16} className="text-text-muted shrink-0" />
+        <CalendarIcon className="text-text-muted shrink-0" />
         <span className={`text-base leading-[1.4] ${selectedDate ? "text-text-primary" : "text-text-muted"}`}>
           {selectedDate
             ? format(selectedDate, "d MMM, yyyy")
@@ -79,7 +79,7 @@ export default function DatePicker() {
 
       {isDatePickerOpen && (
         <div className="absolute left-0 bottom-full mb-1 bg-white border border-border rounded-xl shadow-xl z-30 p-4 w-72">
-          
+
           <div className="flex items-center justify-between mb-3">
             <Button variant="secondary" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))} size="icon" className="px-2!">
               <ArrowLeft size={16} className="text-text-secondary" />
