@@ -7,11 +7,11 @@ export const DURATION_OPTIONS = [
 ]
 
 export const COMMISSION_TIERS = [
-  { id: "tier_1", label: "Tier Name Here" },
-  { id: "tier_2", label: "Tier Name Here" },
-  { id: "tier_3", label: "Tier Name Here" },
-  { id: "tier_4", label: "Tier Name Here" },
-  { id: "tier_5", label: "Tier Name Here" },
+  { id: "tier_1", label: "Tier 1" },
+  { id: "tier_2", label: "Tier 2" },
+  { id: "tier_3", label: "Tier 3" },
+  { id: "tier_4", label: "Tier 4" },
+  { id: "tier_5", label: "Tier 5" },
 ]
 
 export const EVENT_OPTIONS = [

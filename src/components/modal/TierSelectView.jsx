@@ -52,7 +52,7 @@ export default function TierSelectView() {
               }
             `}
           >
-            <span className={`text-base leading-[1.4] ${selectedTier ? "text-text-primary" : "text-text-muted"}`}>
+            <span className={`text-base leading-[1.4] ${selectedTier ? "text-text-primary" : "text-text-placeholder"}`}>
               {selectedTier?.label || "Select a tier"}
             </span>
             {isDropdownOpen ? (

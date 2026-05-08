@@ -109,7 +109,7 @@ export default function EventDropdown() {
           }
         `}
       >
-        <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-muted"}`}>
+        <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-placeholder"}`}>
           {displayLabel || "Select an event"}
         </span>
 
@@ -166,7 +166,7 @@ export default function EventDropdown() {
                         value={eventValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="flex-1 py-2 pr-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
+                        className="flex-1 py-2 pr-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-placeholder placeholder:text-base placeholder:leading-[1.4]"
                         maxLength={MAX_LENGTH_INPUT_ALLOWED}
                       />
                     </div>
@@ -183,7 +183,7 @@ export default function EventDropdown() {
                         value={eventValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="py-2 px-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
+                        className="py-2 px-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-placeholder placeholder:text-base placeholder:leading-[1.4]"
                         maxLength={MAX_LENGTH_INPUT_ALLOWED}
                       />
                     </div>
@@ -201,7 +201,7 @@ export default function EventDropdown() {
                           className={
                             `text-base leading-[1.4] ${selectedDuration
                               ? "text-text-primary"
-                              : "text-text-muted"
+                              : "text-text-placeholder"
                             }`
                           }
                         >
