@@ -76,6 +76,16 @@ const gamificationSlice = createSlice({
       state.isDurationDropdownOpen = false
       state.eventSnapshot = null
       
+      if (
+        state.selectedRewardId === "upgrade_commission" &&
+        ["is_onboarded", "posts_period"].includes(state.selectedEventId)
+      ) {
+        state.selectedRewardId = null
+        state.selectedTierId = null
+        state.rewardValue = ""
+        state.isRewardSaved = false
+      }
+
       state.isRewardDropdownOpen = true
     },
 

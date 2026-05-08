@@ -91,7 +91,7 @@ export default function RewardDropdown() {
           ${isRewardDropdownOpen
             ? "border-brand-500 ring-1 ring-brand-500"
             : "border-border hover:border-gray-300"
-          } ${!isEventSaved ? "opacity-70 pointer-events-none" : ""}
+          }
         `}
       >
         <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-muted"}`}>

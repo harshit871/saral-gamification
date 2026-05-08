@@ -9,7 +9,7 @@ export default function SuccessToast() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(dismissSuccess())
-    }, 2500)
+    }, 1500)
     return () => clearTimeout(timer)
   }, [dispatch])
 
