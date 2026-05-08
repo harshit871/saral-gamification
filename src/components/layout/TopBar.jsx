@@ -7,6 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import profileAvatar from "@/assets/profile-avatar.png";
 
 export default function TopBar() {
   return (
@@ -50,7 +51,7 @@ export default function TopBar() {
 
           <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
             <img
-              src="/src/assets/profile-avatar.png"
+              src={profileAvatar}
               alt="User avatar"
               className="w-full h-full object-cover"
             />
