@@ -11,8 +11,8 @@ import profileAvatar from "@/assets/profile-avatar.png";
 
 export default function TopBar() {
   return (
-    <header className="h-14 border-b border-border px-4 md:px-6 flex justify-center">
-      <div className="flex items-center justify-between w-4xl">
+    <header className="h-14 bg-white border-b border-border px-4 md:px-6 flex justify-center">
+      <div className="flex items-center justify-between w-full max-w-4xl">
 
         <div className="flex items-center gap-3">
           <div className="flex md:hidden items-center gap-2">

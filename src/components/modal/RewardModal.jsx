@@ -100,6 +100,7 @@ export default function RewardModal() {
               id="modal-cancel-btn"
               variant="secondary"
               onClick={() => dispatch(closeModal())}
+              className="text-sm md:text-base"
             >
               Cancel
             </Button>
@@ -110,7 +111,7 @@ export default function RewardModal() {
                 variant="primary"
                 disabled={!canCreate}
                 onClick={() => dispatch(createRewardSuccess())}
-                className="w-full"
+                className="w-full text-sm md:text-base "
               >
                 Create Reward
               </Button>
