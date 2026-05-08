@@ -24,7 +24,9 @@ export default function TopBar() {
             </span>
           </div>
 
-          <Breadcrumb>
+          <p className="flex md:hidden text-text-primary text-base md:text-lg font-semibold">Campaign Name</p>
+
+          <Breadcrumb className="hidden md:block">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/campaign" className="text-base md:text-lg font-semibold m-0">Campaigns</BreadcrumbLink>
