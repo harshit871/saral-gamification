@@ -82,7 +82,7 @@ export default function EventDropdown() {
   })()
 
   const handleNumericInput = (e) => {
-    const sanitised = e.target.value.replace(/[^1-9]/g, "")
+    const sanitised = e.target.value.replace(/[^0-9]/g, "")
     dispatch(setEventValue(sanitised))
   }
 
