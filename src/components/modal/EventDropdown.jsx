@@ -14,6 +14,7 @@ import {
   cancelEvent,
 } from "@/store/gamificationSlice"
 import { EVENT_OPTIONS, DURATION_OPTIONS } from "@/constants/rewardOptions"
+import { sanitizeNumericInput } from "@/lib/utils"
 
 export default function EventDropdown() {
   const dispatch = useDispatch()
@@ -82,7 +83,7 @@ export default function EventDropdown() {
   })()
 
   const handleNumericInput = (e) => {
-    const sanitised = e.target.value.replace(/[^0-9]/g, "")
+    const sanitised = sanitizeNumericInput(e.target.value)
     dispatch(setEventValue(sanitised))
   }
 

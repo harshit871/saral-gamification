@@ -12,6 +12,7 @@ import {
   cancelReward,
 } from "@/store/gamificationSlice"
 import { REWARD_OPTIONS, COMMISSION_TIERS } from "@/constants/rewardOptions"
+import { sanitizeNumericInput } from "@/lib/utils"
 
 export default function RewardDropdown() {
   const dispatch = useDispatch()
@@ -65,7 +66,7 @@ export default function RewardDropdown() {
       : null
 
   const handleNumericInput = (e) => {
-    const sanitised = e.target.value.replace(/[^0-9]/g, "")
+    const sanitised = sanitizeNumericInput(e.target.value)
     dispatch(setRewardValue(sanitised))
   }
 
