@@ -129,12 +129,12 @@ export default function RewardDropdown() {
                     !isOptionDisabled && dispatch(selectReward(option.id))
                   }
                   className={`
-                    w-full flex items-center justify-between px-3 py-2.5 text-sm text-left
-                    transition-colors duration-100
+                    group w-full flex items-center justify-between px-3 py-2.5 text-sm text-left
+                    transition-colors duration-100 rounded-lg
                     ${isOptionDisabled
                       ? "text-text-muted cursor-not-allowed"
                       : isSelected
-                        ? "text-brand-500 bg-brand-50/50 cursor-pointer"
+                        ? "text-brand-500 bg-brand-700 cursor-pointer"
                         : "text-text-primary hover:bg-gray-50 cursor-pointer"
                     }
                   `}
@@ -148,7 +148,10 @@ export default function RewardDropdown() {
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && !isOptionDisabled && (
                       option.id === "upgrade_commission" && selectedTier ? (
-                        <Pencil size={16} className="text-text-muted" />
+                        <>
+                          <Check size={16} className="text-brand-500 group-hover:hidden" />
+                          <Pencil size={16} className="text-text-muted hidden group-hover:block" />
+                        </>
                       ) : (
                         <Check size={16} className="text-brand-500" />
                       )
