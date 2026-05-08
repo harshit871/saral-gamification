@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Bell } from "lucide-react"
 import {
   Breadcrumb,
@@ -8,6 +9,10 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import profileAvatar from "@/assets/profile-avatar.png";
+import { BREADCRUMBS } from "@/constants/miscellaneous";
+
+const breadcrumbClass =
+  "text-base md:text-lg font-semibold m-0"
 
 export default function TopBar() {
   return (
@@ -28,17 +33,27 @@ export default function TopBar() {
 
           <Breadcrumb className="hidden md:block">
             <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/campaign" className="text-base md:text-lg font-semibold m-0">Campaigns</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/campaign-name" className="text-base md:text-lg font-semibold m-0">Campaign Name</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-base md:text-lg font-semibold text-text-primary m-0">Campaign Settings</BreadcrumbPage>
-              </BreadcrumbItem>
+              {BREADCRUMBS.map((item, index) => (
+                <Fragment key={item.label}>
+                  <BreadcrumbItem>
+                    {item.isCurrent ? (
+                      <BreadcrumbPage
+                        className={`${breadcrumbClass} text-text-primary`}
+                      >
+                        {item.label}
+                      </BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink className={breadcrumbClass}>
+                        {item.label}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+
+                  {index < BREADCRUMBS.length - 1 && (
+                    <BreadcrumbSeparator />
+                  )}
+                </Fragment>
+              ))}
             </BreadcrumbList>
           </Breadcrumb>
         </div>

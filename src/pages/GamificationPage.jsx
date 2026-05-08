@@ -22,7 +22,7 @@ export default function GamificationPage() {
 
         {TABS.map(({ value }) => {
           if (value === "gamify") {
-            return (<TabsContent value="gamify">
+            return (<TabsContent key={value} value={value}>
               <div className="sm:mt-4 gamifyBg">
                 <div className="relative flex flex-col items-center py-10 md:pt-15 md:pb-10 px-6 md:px-8">
                   <h2 className="text-xl md:text-[1.75rem] font-semibold text-magenta-primary mb-2 text-center">

@@ -9,3 +9,9 @@ export const TABS = [
 export const MAX_LENGTH_INPUT_ALLOWED = 15;
 
 export const TOAST_TIMEOUT_TIME_IN_MS = 2500;
+
+export const BREADCRUMBS = [
+    { label: "Campaigns" },
+    { label: "Campaign Name" },
+    { label: "Campaign Settings", isCurrent: true },
+]
