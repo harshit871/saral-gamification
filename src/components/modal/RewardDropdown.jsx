@@ -137,11 +137,19 @@ export default function RewardDropdown() {
                     }
                   `}
                 >
-                  <span className="text-base leading-[1.4]">{option.label}</span>
+                  <span className="text-base leading-[1.4]">
+                    {option.id === "upgrade_commission" && selectedTier
+                      ? option.getDisplayLabel(null, null, selectedTier.label)
+                      : option.label}
+                  </span>
 
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && !isOptionDisabled && (
-                      <Check size={16} className="text-brand-500" />
+                      option.id === "upgrade_commission" && selectedTier ? (
+                        <Pencil size={16} className="text-text-muted" />
+                      ) : (
+                        <Check size={16} className="text-brand-500" />
+                      )
                     )}
                   </span>
                 </button>

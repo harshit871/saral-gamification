@@ -43,16 +43,18 @@ export default function RewardModal() {
   if (modalView === "tier_select") {
     return (
       <div
-        className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
+        className="fixed inset-0 z-40 bg-black/40 overflow-y-auto"
         onClick={(e) => {
           if (e.target === e.currentTarget) dispatch(closeModal())
         }}
       >
-        <div
-          className="bg-white shadow-2xl w-full animate-fade-in rounded-t-2xl md:rounded-xl md:max-w-md md:mx-4 flex flex-col"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <TierSelectView />
+        <div className="min-h-full flex items-center justify-center p-4 pointer-events-none">
+          <div
+            className="bg-white shadow-2xl w-full max-w-md animate-fade-in rounded-xl flex flex-col pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <TierSelectView />
+          </div>
         </div>
       </div>
     )
@@ -60,64 +62,60 @@ export default function RewardModal() {
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
+      className="fixed inset-0 z-40 bg-black/40 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) dispatch(closeModal())
       }}
     >
-      
-      <div
-        className="bg-white shadow-2xl w-full animate-fade-in rounded-t-2xl md:rounded-xl md:max-w-md md:mx-4 flex flex-col"
-        style={{ overflow: "visible" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        
-        <div className="md:hidden flex justify-center pt-3 pb-1 shrink-0">
-          <div className="w-10 h-1 rounded-full bg-gray-200" />
-        </div>
+      <div className="min-h-full flex items-center justify-center p-4 pointer-events-none">
+        <div
+          className="bg-white shadow-2xl w-full max-w-md animate-fade-in rounded-xl flex flex-col pointer-events-auto"
+          style={{ overflow: "visible" }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
+            <h2 className="text-xl leading-[1.4] font-medium text-text-primary m-0">
+              Create your reward system
+            </h2>
 
-        <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
-          <h2 className="text-xl leading-[1.4] font-medium text-text-primary m-0">
-            Create your reward system
-          </h2>
-
-          <button
-            id="modal-close-btn"
-            onClick={() => dispatch(closeModal())}
-            className="p-1 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
-          >
-            <X size={18} className="text-text-secondary" />
-          </button>
-        </div>
-
-        <div className="px-6 space-y-5 flex-1" style={{ overflow: "visible" }}>
-          <EventDropdown />
-          <RewardDropdown />
-
-          <TimeBoundToggle />
-          <DatePicker />
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 px-6 pt-5 pb-5 shrink-0">
-          <Button
-            id="modal-cancel-btn"
-            variant="secondary"
-            onClick={() => dispatch(closeModal())}
-          >
-            Cancel
-          </Button>
-
-          <HoverTooltip message={!canCreate ? tooltipMessage : null}>
-            <Button
-              id="modal-create-btn"
-              variant="primary"
-              disabled={!canCreate}
-              onClick={() => dispatch(createRewardSuccess())}
-              className="w-full"
+            <button
+              id="modal-close-btn"
+              onClick={() => dispatch(closeModal())}
+              className="p-1 rounded-md hover:bg-gray-100 transition-colors cursor-pointer"
             >
-              Create Reward
+              <X size={18} className="text-text-secondary" />
+            </button>
+          </div>
+
+          <div className="px-6 space-y-5 flex-1" style={{ overflow: "visible" }}>
+            <EventDropdown />
+            <RewardDropdown />
+
+            <TimeBoundToggle />
+            <DatePicker />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 px-6 pt-5 pb-5 shrink-0">
+            <Button
+              id="modal-cancel-btn"
+              variant="secondary"
+              onClick={() => dispatch(closeModal())}
+            >
+              Cancel
             </Button>
-          </HoverTooltip>
+
+            <HoverTooltip message={!canCreate ? tooltipMessage : null}>
+              <Button
+                id="modal-create-btn"
+                variant="primary"
+                disabled={!canCreate}
+                onClick={() => dispatch(createRewardSuccess())}
+                className="w-full"
+              >
+                Create Reward
+              </Button>
+            </HoverTooltip>
+          </div>
         </div>
       </div>
     </div>
