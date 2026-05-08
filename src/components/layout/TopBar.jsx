@@ -50,7 +50,7 @@ export default function TopBar() {
 
           <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
             <img
-              src="/src/assets/avatar.jpg"
+              src="/src/assets/avatar.png"
               alt="User avatar"
               className="w-full h-full object-cover"
             />
