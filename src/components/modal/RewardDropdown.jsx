@@ -13,6 +13,7 @@ import {
 } from "@/store/gamificationSlice"
 import { REWARD_OPTIONS, COMMISSION_TIERS } from "@/constants/rewardOptions"
 import { sanitizeNumericInput } from "@/lib/utils"
+import { MAX_LENGTH_INPUT_ALLOWED } from "@/constants/miscellaneous"
 
 export default function RewardDropdown() {
   const dispatch = useDispatch()
@@ -170,7 +171,7 @@ export default function RewardDropdown() {
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
                         className="flex-1 py-2 pr-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
-                        maxLength={20}
+                        maxLength={MAX_LENGTH_INPUT_ALLOWED}
                       />
                     </div>
                   </div>

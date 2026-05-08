@@ -5,3 +5,5 @@ export const TABS = [
     { value: "preferences", label: "Preferences" },
     { value: "gamify", label: "Gamification" },
 ];
+
+export const MAX_LENGTH_INPUT_ALLOWED = 15;
