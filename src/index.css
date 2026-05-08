@@ -16,7 +16,8 @@
   --color-surface-secondary: #faf5ff;
   --color-surface-overlay: rgba(0, 0, 0, 0.4);
 
-  --color-border: #fee7fe;
+  --color-border: #e3e3e3;
+  --color-border-purple: #fee7fe;
   --color-border-dashed: #e9d5ff;
 
   --color-text-primary: #303030;

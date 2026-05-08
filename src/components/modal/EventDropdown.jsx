@@ -184,7 +184,7 @@ export default function EventDropdown() {
                 {/* Posts X times every Y period — dual input */}
                 {isSelected && option.inputType === "posts_period" && (
                   <div className="px-3 pb-2.5 flex items-center gap-2">
-                    <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500 w-24">
+                    <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
                       <input
                         ref={inputRef}
                         type="text"
@@ -192,7 +192,7 @@ export default function EventDropdown() {
                         value={eventValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="w-full py-2 px-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted"
+                        className="py-2 px-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted"
                       />
                     </div>
 

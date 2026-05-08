@@ -23,16 +23,16 @@ export default function TopBar() {
         <div className="flex items-center gap-3">
           {/* Notification bell */}
           <button className="relative p-2 rounded-lg hover:bg-gray-50 transition-colors duration-150">
-            <Bell size={18} className="text-text-secondary" />
+            <Bell size={20} className="text-text-secondary" />
             <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
               5
             </span>
           </button>
 
           {/* User avatar */}
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center overflow-hidden">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
             <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=saral"
+              src="/src/assets/avatar.jpg"
               alt="User avatar"
               className="w-full h-full object-cover"
             />

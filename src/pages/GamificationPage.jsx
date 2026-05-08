@@ -5,7 +5,7 @@ import FEATURE_CARDS from "@/constants/featureCards"
 
 function FeatureCard({ icon: Icon, title, description }) {
   return (
-    <div className="bg-white rounded-xl border border-border p-5 md:p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white rounded-xl border border-border-purple p-5 md:p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
       <div className="bg-magenta-secondary p-2.5 rounded-xl mb-3 md:mb-4">
         <div className="w-12 h-12 md:w-13 md:h-13 rounded-lg border-dashed border-brand-200 flex items-center justify-center bg-surface">
           <Icon size={20} className="text-magenta-tertiary" />
