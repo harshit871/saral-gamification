@@ -18,8 +18,9 @@ A pixel-perfect implementation of the Saral platform's **Gamification** feature 
   - Step 2: Select a reward incentive (e.g. *Flat $X Bonus*, *Upgrade to Y% commission*)
   - Step 3 _(optional)_: Toggle time-bound and pick an end date — past dates and today are disabled
 - **Real-time label updates** — the dropdown trigger reflects the typed value instantly (e.g. `Cross $100 in sales`)
-- **Validation tooltips** — contextual dark tooltip above the primary button when the form is incomplete
+- **Robust Validations** — strict numeric validations (preventing zero and negative inputs) and conditional hover-tooltips for disabled actions.
 - **Auto-progression** — saving an event auto-opens the reward dropdown; saving a reward reveals the time-bound toggle
+- **Mobile-First Responsiveness** — smart scrollable overlays and bottom-sheet styling ensure the UI never breaks on small devices.
 - **Success toast** — animated confirmation badge auto-dismisses after 2.5 seconds
 
 ---
@@ -31,7 +32,7 @@ A pixel-perfect implementation of the Saral platform's **Gamification** feature 
 | Framework | **React 19** (Vite) | Fast HMR, modern ecosystem |
 | Styling | **Tailwind CSS v4** | Utility-first, custom `@theme` tokens |
 | State | **Redux Toolkit** | Predictable, scalable state for the full modal flow |
-| Icons | **Lucide React** | Consistent, tree-shakeable icon set |
+| Icons | **Lucide React + Custom SVGs** | Consistent iconography combined with pixel-perfect custom assets |
 | Date utilities | **date-fns** | Lightweight, functional date helpers |
 | Build | **Vite 8** | Sub-second dev server, optimised bundles |
 
@@ -44,6 +45,10 @@ src/
 ├── main.jsx                    # Entry — Redux Provider + StrictMode
 ├── App.jsx                     # Root — AppLayout + GamificationPage + RewardModal
 ├── index.css                   # Global styles + Tailwind @theme tokens
+│
+├── assets/
+│   ├── avatar.jpg              # User avatar asset
+│   └── icons/                  # Custom SVG icon components (Bell, Success)
 │
 ├── constants/
 │   └── rewardOptions.js        # Event & reward option definitions (single source of truth)
@@ -144,9 +149,11 @@ Both the dropdown options and their display labels are co-located in constants. 
 
 ## Reviewer Notes
 
-- The **Figma design** was matched pixel-by-pixel: modal dimensions, border-radius, dropdown hover states, selected-state pink highlight with checkmark, and the dark tooltip above the footer buttons.
+- The **Figma design** was matched pixel-by-pixel: modal dimensions, border-radius, custom SVG icons, selected-state pink highlights, and the dark tooltips.
+- **Input Validation**: The app strictly enforces positive integers for reward values. Empty or zero values correctly block form submission and display helpful nudges.
+- **Responsive Layout**: Dropdowns automatically render outside the modal bounds (upwards or downwards based on available space) to prevent layout jumps
 - The **"Create Reward" button** is disabled (with tooltip) until all required fields are filled — matches the Figma tooltip states exactly.
-- **Date validation**: `date-fns`'s `isBefore(day, addDays(today, 1))` ensures only tomorrow onwards is selectable.
+- **Date validation**: `date-fns` ensures only tomorrow onwards is selectable.
 - **Accessibility**: Toggle uses `role="switch"` + `aria-checked`; all interactive elements have unique `id` attributes for automated testing.
 
 ---
