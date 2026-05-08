@@ -89,8 +89,9 @@ export default function RewardDropdown() {
           ${isRewardDropdownOpen
             ? "border-brand-500 ring-1 ring-brand-500"
             : "border-border hover:border-gray-300"
-          }
+          } ${!isEventSaved ? "opacity-50 cursor-not-allowed" : ""}
         `}
+        disabled={!isEventSaved}
       >
         <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-muted"}`}>
           {displayLabel || "Select a reward"}
@@ -168,6 +169,7 @@ export default function RewardDropdown() {
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
                         className="flex-1 py-2 pr-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
+                        maxLength={20}
                       />
                     </div>
                   </div>

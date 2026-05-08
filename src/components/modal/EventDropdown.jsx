@@ -82,7 +82,7 @@ export default function EventDropdown() {
   })()
 
   const handleNumericInput = (e) => {
-    const sanitised = e.target.value.replace(/[^0-9]/g, "")
+    const sanitised = e.target.value.replace(/[^1-9]/g, "")
     dispatch(setEventValue(sanitised))
   }
 
@@ -165,6 +165,7 @@ export default function EventDropdown() {
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
                         className="flex-1 py-2 pr-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
+                        maxLength={20}
                       />
                     </div>
                   </div>
@@ -181,6 +182,7 @@ export default function EventDropdown() {
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
                         className="py-2 px-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
+                        maxLength={20}
                       />
                     </div>
 
