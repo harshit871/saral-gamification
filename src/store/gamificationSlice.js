@@ -153,8 +153,13 @@ const gamificationSlice = createSlice({
     },
     goBackFromTierSelect(state) {
       state.modalView = "main"
-      state.selectedRewardId = null
-      state.selectedTierId = null
+      if (state.rewardSnapshot) {
+        state.selectedRewardId = state.rewardSnapshot.selectedRewardId
+        state.selectedTierId = state.rewardSnapshot.selectedTierId
+      } else {
+        state.selectedRewardId = null
+        state.selectedTierId = null
+      }
       state.isRewardDropdownOpen = true
     },
     saveReward(state) {
