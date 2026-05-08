@@ -1,14 +1,4 @@
-/**
- * Tooltip — dark nudge bubble.
- *
- * Wraps a disabled button to show a tooltip on hover.
- * The wrapper itself must be `relative` and contain both the button and this tooltip.
- *
- * Usage:
- *   <HoverTooltip message="…">
- *     <Button disabled … />
- *   </HoverTooltip>
- */
+
 export default function HoverTooltip({ message, children }) {
   if (!message) return <>{children}</>
 

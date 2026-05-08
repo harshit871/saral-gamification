@@ -4,7 +4,7 @@ export default function TopBar() {
   return (
     <header className="h-14 border-b border-border px-4 md:px-6 flex justify-center">
       <div className="flex items-center justify-between w-4xl">
-        {/* Logo mark visible only on mobile (sidebar logo is hidden) */}
+        
         <div className="flex items-center gap-3">
           <div className="flex md:hidden items-center gap-2">
             <div className="w-6 h-6 rounded-md bg-linear-to-br from-red-500 to-pink-500 flex items-center justify-center">
@@ -21,7 +21,7 @@ export default function TopBar() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Notification bell */}
+          
           <button className="relative p-2 rounded-lg hover:bg-gray-50 transition-colors duration-150">
             <Bell size={20} className="text-text-secondary" />
             <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
@@ -29,7 +29,6 @@ export default function TopBar() {
             </span>
           </button>
 
-          {/* User avatar */}
           <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden">
             <img
               src="/src/assets/avatar.jpg"

@@ -29,7 +29,6 @@ export default function RewardDropdown() {
   const selectedOption = REWARD_OPTIONS.find((o) => o.id === selectedRewardId)
   const selectedTier = COMMISSION_TIERS.find((t) => t.id === selectedTierId)
 
-  /* "Upgrade Commission Tier" is disabled for "Is Onboarded" event */
   const isTierDisabled = selectedEventId === "is_onboarded"
 
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function RewardDropdown() {
     }
   }, [selectedRewardId, isRewardDropdownOpen, selectedOption?.inputType])
 
-  /* Live display label — updates as user types */
   const displayLabel = (() => {
     if (!selectedOption) return null
 
@@ -57,36 +55,26 @@ export default function RewardDropdown() {
     return selectedOption.label
   })()
 
-  /* Positive integer > 0 required */
   const hasValidValue = rewardValue !== "" && Number(rewardValue) > 0
 
-  /* Can the current selection be saved? (flat_bonus only) */
   const canSave = selectedRewardId === "flat_bonus" && hasValidValue
 
-  /* Tooltip for the Save button — shown on hover when disabled */
   const tooltipMsg =
     selectedRewardId === "flat_bonus" && !hasValidValue
       ? "Enter the bonus amount to continue"
       : null
 
-  /* Only positive integers */
   const handleNumericInput = (e) => {
     const sanitised = e.target.value.replace(/[^0-9]/g, "")
     dispatch(setRewardValue(sanitised))
   }
 
-  /*
-   * Always render — the component is always visible and interactive.
-   * It's a mandatory field; the Create Reward button stays disabled
-   * until a reward is selected and saved.
-   */
   return (
     <div className="relative">
       <label className="block text-sm text-text-primary mb-1.5">
         Reward with <span className="text-brand-500">*</span>
       </label>
 
-      {/* Trigger */}
       <button
         id="reward-dropdown-trigger"
         type="button"
@@ -124,7 +112,6 @@ export default function RewardDropdown() {
         </span>
       </button>
 
-      {/* Dropdown panel */}
       {isRewardDropdownOpen && (
         <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-border rounded-lg shadow-lg z-20">
           {REWARD_OPTIONS.map((option) => {
@@ -153,7 +140,7 @@ export default function RewardDropdown() {
                   `}
                 >
                   <span>{option.label}</span>
-                  {/* Checkmark — fixed-width slot, same position as edit icon */}
+                  
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && !isOptionDisabled && (
                       <Check size={16} className="text-brand-500" />
@@ -161,7 +148,6 @@ export default function RewardDropdown() {
                   </span>
                 </button>
 
-                {/* Dollar input for flat bonus */}
                 {isSelected && option.inputType === "dollar" && (
                   <div className="px-3 pb-2.5">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
@@ -184,7 +170,6 @@ export default function RewardDropdown() {
             )
           })}
 
-          {/* Footer: Cancel + Save with hover tooltip (flat_bonus only) */}
           {selectedRewardId === "flat_bonus" && (
             <div className="grid grid-cols-2 gap-3 px-3 py-3 border-t border-border">
               <Button

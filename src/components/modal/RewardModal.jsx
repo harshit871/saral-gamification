@@ -40,7 +40,6 @@ export default function RewardModal() {
   if (!isModalOpen) return null
   if (showSuccess) return <SuccessToast />
 
-  /* ── Tier select view ── */
   if (modalView === "tier_select") {
     return (
       <div
@@ -59,7 +58,6 @@ export default function RewardModal() {
     )
   }
 
-  /* ── Main view ── */
   return (
     <div
       className="fixed inset-0 z-40 flex items-end md:items-center justify-center bg-black/40"
@@ -67,22 +65,17 @@ export default function RewardModal() {
         if (e.target === e.currentTarget) dispatch(closeModal())
       }}
     >
-      {/*
-       * Modal container — NO overflow-hidden.
-       * Dropdowns and calendar are absolutely positioned and
-       * render OUTSIDE the modal boundary.
-       */}
+      
       <div
         className="bg-white shadow-2xl w-full animate-fade-in rounded-t-2xl md:rounded-xl md:max-w-md md:mx-4 flex flex-col"
         style={{ overflow: "visible" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Drag handle — mobile only */}
+        
         <div className="md:hidden flex justify-center pt-3 pb-1 shrink-0">
           <div className="w-10 h-1 rounded-full bg-gray-200" />
         </div>
 
-        {/* Header */}
         <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
           <h2 className="text-xl font-medium text-text-primary m-0">
             Create your reward system
@@ -96,17 +89,14 @@ export default function RewardModal() {
           </button>
         </div>
 
-        {/* Body */}
         <div className="px-6 space-y-5 flex-1" style={{ overflow: "visible" }}>
           <EventDropdown />
           <RewardDropdown />
-
 
           <TimeBoundToggle />
           <DatePicker />
         </div>
 
-        {/* Footer */}
         <div className="grid grid-cols-2 gap-3 px-6 pt-5 pb-5 shrink-0">
           <Button
             id="modal-cancel-btn"

@@ -36,7 +36,6 @@ export default function EventDropdown() {
     }
   }, [selectedEventId, isEventDropdownOpen, selectedOption?.requiresInput])
 
-  /* Live display label — updates as user types */
   const displayLabel = (() => {
     if (!selectedOption) return null
 
@@ -58,10 +57,8 @@ export default function EventDropdown() {
     return selectedOption.label
   })()
 
-  /* Positive integer > 0 required for numeric fields */
   const hasValidValue = eventValue !== "" && Number(eventValue) > 0
 
-  /* Can the current selection be saved? */
   const canSave = (() => {
     if (!selectedEventId) return false
     if (!selectedOption?.requiresInput) return true
@@ -71,7 +68,6 @@ export default function EventDropdown() {
     return true
   })()
 
-  /* Tooltip for the Save button — shown on hover when disabled */
   const tooltipMsg = (() => {
     if (!selectedEventId) return "Select an event to continue"
     if (selectedOption?.inputType === "dollar" && !hasValidValue)
@@ -85,7 +81,6 @@ export default function EventDropdown() {
     return null
   })()
 
-  /* Only positive integers allowed */
   const handleNumericInput = (e) => {
     const sanitised = e.target.value.replace(/[^0-9]/g, "")
     dispatch(setEventValue(sanitised))
@@ -97,7 +92,6 @@ export default function EventDropdown() {
         Reward event <span className="text-brand-500">*</span>
       </label>
 
-      {/* Trigger */}
       <button
         id="event-dropdown-trigger"
         type="button"
@@ -118,7 +112,6 @@ export default function EventDropdown() {
           {displayLabel || "Select an event"}
         </span>
 
-        {/* Right-side icons — edit pencil and chevron share the same slot */}
         <span className="flex items-center gap-1 shrink-0">
           {isEventSaved && !isEventDropdownOpen && (
             <Pencil
@@ -134,7 +127,6 @@ export default function EventDropdown() {
         </span>
       </button>
 
-      {/* Dropdown panel */}
       {isEventDropdownOpen && (
         <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-border rounded-lg shadow-lg z-20">
           {EVENT_OPTIONS.map((option) => {
@@ -155,13 +147,12 @@ export default function EventDropdown() {
                   `}
                 >
                   <span>{option.label}</span>
-                  {/* Checkmark — right-aligned, same position as edit icon */}
+                  
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && <Check size={16} className="text-brand-500" />}
                   </span>
                 </button>
 
-                {/* Dollar input (Cross $X in sales) */}
                 {isSelected && option.inputType === "dollar" && (
                   <div className="my-1">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
@@ -181,7 +172,6 @@ export default function EventDropdown() {
                   </div>
                 )}
 
-                {/* Posts X times every Y period — dual input */}
                 {isSelected && option.inputType === "posts_period" && (
                   <div className="px-3 pb-2.5 flex items-center gap-2">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
@@ -241,7 +231,6 @@ export default function EventDropdown() {
             )
           })}
 
-          {/* Footer: Cancel + Save with hover tooltip */}
           <div className="grid grid-cols-2 gap-3 px-3 py-3 border-t border-border">
             <Button
               variant="secondary"

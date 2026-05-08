@@ -19,7 +19,7 @@ export default function TierSelectView() {
 
   return (
     <>
-      {/* Header */}
+      
       <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0">
         <h2 className="text-base font-semibold text-text-primary m-0">
           Select a commission tier
@@ -32,14 +32,13 @@ export default function TierSelectView() {
         </button>
       </div>
 
-      {/* Body */}
       <div className="px-6 flex-1">
         <label className="block text-sm font-medium text-text-primary mb-1.5">
           Upgrade to <span className="text-brand-500">*</span>
         </label>
 
         <div className="relative">
-          {/* Tier dropdown trigger */}
+          
           <button
             type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -67,7 +66,6 @@ export default function TierSelectView() {
             )}
           </button>
 
-          {/* Tier options */}
           {isDropdownOpen && (
             <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-border rounded-lg shadow-lg z-20">
               {COMMISSION_TIERS.map((tier) => (
@@ -95,7 +93,6 @@ export default function TierSelectView() {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="grid grid-cols-2 gap-3 px-6 pt-5 pb-5 shrink-0">
         <Button
           variant="secondary"

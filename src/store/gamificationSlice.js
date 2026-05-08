@@ -3,20 +3,16 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   isModalOpen: false,
 
-  /* Modal view: "main" | "tier_select" */
   modalView: "main",
 
-  /* Event selection */
   selectedEventId: null,
   eventValue: "",
   eventDuration: null,
   isEventDropdownOpen: false,
   isEventSaved: false,
 
-  /* Snapshot — stores saved values so Cancel can revert */
   eventSnapshot: null,
 
-  /* Reward selection */
   selectedRewardId: null,
   rewardValue: "",
   selectedTierId: null,
@@ -25,15 +21,12 @@ const initialState = {
 
   rewardSnapshot: null,
 
-  /* Time-bound */
   isTimeBound: false,
   endDate: null,
   isDatePickerOpen: false,
 
-  /* Duration picker for posts_period event */
   isDurationDropdownOpen: false,
 
-  /* UI feedback */
   showSuccess: false,
 }
 
@@ -48,7 +41,6 @@ const gamificationSlice = createSlice({
       return { ...initialState }
     },
 
-    /* ── Event ── */
     toggleEventDropdown(state) {
       state.isEventDropdownOpen = !state.isEventDropdownOpen
       if (state.isEventDropdownOpen) {
@@ -61,12 +53,11 @@ const gamificationSlice = createSlice({
       state.selectedEventId = action.payload
       state.eventValue = ""
       state.eventDuration = null
-      /* Don't clear isEventSaved here — that happens only if
-         we're switching to a different option while editing */
+      
       state.isEventSaved = false
     },
     setEventValue(state, action) {
-      /* Only allow non-negative numbers (strip leading minus) */
+      
       const raw = action.payload
       if (raw === "" || (/^\d*\.?\d*$/.test(raw) && Number(raw) >= 0)) {
         state.eventValue = raw
@@ -84,11 +75,10 @@ const gamificationSlice = createSlice({
       state.isEventDropdownOpen = false
       state.isDurationDropdownOpen = false
       state.eventSnapshot = null
-      /* auto-open reward dropdown */
+      
       state.isRewardDropdownOpen = true
     },
 
-    /* Edit — snapshot current values then re-open dropdown */
     editEvent(state) {
       state.eventSnapshot = {
         selectedEventId: state.selectedEventId,
@@ -100,7 +90,6 @@ const gamificationSlice = createSlice({
       state.isDatePickerOpen = false
     },
 
-    /* Cancel — revert to snapshot if one exists */
     cancelEvent(state) {
       if (state.eventSnapshot) {
         state.selectedEventId = state.eventSnapshot.selectedEventId
@@ -113,7 +102,6 @@ const gamificationSlice = createSlice({
       state.isDurationDropdownOpen = false
     },
 
-    /* ── Reward ── */
     toggleRewardDropdown(state) {
       state.isRewardDropdownOpen = !state.isRewardDropdownOpen
       if (state.isRewardDropdownOpen) {
@@ -128,7 +116,6 @@ const gamificationSlice = createSlice({
       state.selectedTierId = null
       state.isRewardSaved = false
 
-      /* If "upgrade_commission", switch to tier select view */
       if (action.payload === "upgrade_commission") {
         state.modalView = "tier_select"
         state.isRewardDropdownOpen = false
@@ -181,7 +168,6 @@ const gamificationSlice = createSlice({
       state.isRewardDropdownOpen = false
     },
 
-    /* ── Time-bound ── */
     toggleTimeBound(state) {
       state.isTimeBound = !state.isTimeBound
       if (!state.isTimeBound) {
@@ -202,7 +188,6 @@ const gamificationSlice = createSlice({
       state.isDatePickerOpen = false
     },
 
-    /* ── Creation ── */
     createRewardSuccess(state) {
       state.showSuccess = true
     },
