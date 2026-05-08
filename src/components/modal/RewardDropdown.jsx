@@ -29,7 +29,7 @@ export default function RewardDropdown() {
   const selectedOption = REWARD_OPTIONS.find((o) => o.id === selectedRewardId)
   const selectedTier = COMMISSION_TIERS.find((t) => t.id === selectedTierId)
 
-  const isTierDisabled = selectedEventId === "is_onboarded"
+  const isTierDisabled = ["is_onboarded", "posts_period"].includes(selectedEventId)
 
   useEffect(() => {
     if (
@@ -86,10 +86,9 @@ export default function RewardDropdown() {
         className={`
           group w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-sm
           transition-colors duration-150 cursor-pointer
-          ${
-            isRewardDropdownOpen
-              ? "border-brand-500 ring-1 ring-brand-500"
-              : "border-border hover:border-gray-300"
+          ${isRewardDropdownOpen
+            ? "border-brand-500 ring-1 ring-brand-500"
+            : "border-border hover:border-gray-300"
           }
         `}
       >
@@ -130,17 +129,16 @@ export default function RewardDropdown() {
                   className={`
                     w-full flex items-center justify-between px-3 py-2.5 text-sm text-left
                     transition-colors duration-100
-                    ${
-                      isOptionDisabled
-                        ? "text-text-muted cursor-not-allowed"
-                        : isSelected
-                          ? "text-brand-500 bg-brand-50/50 cursor-pointer"
-                          : "text-text-primary hover:bg-gray-50 cursor-pointer"
+                    ${isOptionDisabled
+                      ? "text-text-muted cursor-not-allowed"
+                      : isSelected
+                        ? "text-brand-500 bg-brand-50/50 cursor-pointer"
+                        : "text-text-primary hover:bg-gray-50 cursor-pointer"
                     }
                   `}
                 >
                   <span className="text-base leading-[1.4]">{option.label}</span>
-                  
+
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && !isOptionDisabled && (
                       <Check size={16} className="text-brand-500" />
