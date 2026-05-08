@@ -80,6 +80,7 @@ export default function RewardModal() {
           <h2 className="text-xl leading-[1.4] font-medium text-text-primary m-0">
             Create your reward system
           </h2>
+
           <button
             id="modal-close-btn"
             onClick={() => dispatch(closeModal())}
