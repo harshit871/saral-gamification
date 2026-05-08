@@ -93,7 +93,7 @@ export default function RewardDropdown() {
           }
         `}
       >
-        <span className={displayLabel ? "text-text-primary" : "text-text-muted"}>
+        <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-muted"}`}>
           {displayLabel || "Select a reward"}
         </span>
 
@@ -139,7 +139,7 @@ export default function RewardDropdown() {
                     }
                   `}
                 >
-                  <span>{option.label}</span>
+                  <span className="text-base leading-[1.4]">{option.label}</span>
                   
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && !isOptionDisabled && (
@@ -161,7 +161,7 @@ export default function RewardDropdown() {
                         value={rewardValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="flex-1 py-2 pr-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted"
+                        className="flex-1 py-2 pr-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
                       />
                     </div>
                   </div>

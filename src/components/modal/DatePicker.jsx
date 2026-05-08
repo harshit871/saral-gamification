@@ -70,7 +70,7 @@ export default function DatePicker() {
         `}
       >
         <CalendarDays size={16} className="text-text-muted shrink-0" />
-        <span className={selectedDate ? "text-text-primary" : "text-text-muted"}>
+        <span className={`text-base leading-[1.4] ${selectedDate ? "text-text-primary" : "text-text-muted"}`}>
           {selectedDate
             ? format(selectedDate, "d MMM, yyyy")
             : "Select End Date"}

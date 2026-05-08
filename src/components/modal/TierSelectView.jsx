@@ -33,7 +33,7 @@ export default function TierSelectView() {
       </div>
 
       <div className="px-6 flex-1">
-        <label className="block text-sm font-medium text-text-primary mb-1.5">
+        <label className="block text-sm text-text-primary mb-1.5">
           Upgrade to <span className="text-brand-500">*</span>
         </label>
 
@@ -52,11 +52,7 @@ export default function TierSelectView() {
               }
             `}
           >
-            <span
-              className={
-                selectedTier ? "text-text-primary" : "text-text-muted"
-              }
-            >
+            <span className={`text-base leading-[1.4] ${selectedTier ? "text-text-primary" : "text-text-muted"}`}>
               {selectedTier?.label || "Select a tier"}
             </span>
             {isDropdownOpen ? (
@@ -77,7 +73,8 @@ export default function TierSelectView() {
                     setIsDropdownOpen(false)
                   }}
                   className={`
-                    w-full text-left px-3 py-2.5 text-sm cursor-pointer transition-colors
+                    w-full text-left px-3 py-2.5 cursor-pointer transition-colors
+                    text-base leading-[1.4]
                     ${
                       selectedTierId === tier.id
                         ? "text-brand-500 bg-brand-50/50"

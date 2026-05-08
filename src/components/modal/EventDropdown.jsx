@@ -101,14 +101,13 @@ export default function EventDropdown() {
         className={`
           group w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-sm
           transition-colors duration-150 cursor-pointer
-          ${
-            isEventDropdownOpen
-              ? "border-brand-500 ring-1 ring-brand-500"
-              : "border-border hover:border-gray-300"
+          ${isEventDropdownOpen
+            ? "border-brand-500 ring-1 ring-brand-500"
+            : "border-border hover:border-gray-300"
           }
         `}
       >
-        <span className={displayLabel ? "text-text-primary" : "text-text-muted"}>
+        <span className={`text-base leading-[1.4] ${displayLabel ? "text-text-primary" : "text-text-muted"}`}>
           {displayLabel || "Select an event"}
         </span>
 
@@ -139,15 +138,14 @@ export default function EventDropdown() {
                   className={`
                     w-full flex items-center justify-between px-3 py-2.5 text-sm text-left
                     transition-colors duration-100 cursor-pointer rounded-lg
-                    ${
-                      isSelected
-                        ? "text-brand-500 bg-brand-700"
-                        : "text-text-primary hover:bg-gray-50"
+                    ${isSelected
+                      ? "text-brand-500 bg-brand-700"
+                      : "text-text-primary hover:bg-gray-50"
                     }
                   `}
                 >
-                  <span>{option.label}</span>
-                  
+                  <span className="text-base leading-[1.4]">{option.label}</span>
+
                   <span className="w-4 shrink-0 flex justify-center">
                     {isSelected && <Check size={16} className="text-brand-500" />}
                   </span>
@@ -166,14 +164,14 @@ export default function EventDropdown() {
                         value={eventValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="flex-1 py-2 pr-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted"
+                        className="flex-1 py-2 pr-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
                       />
                     </div>
                   </div>
                 )}
 
                 {isSelected && option.inputType === "posts_period" && (
-                  <div className="px-3 pb-2.5 flex items-center gap-2">
+                  <div className="px-3 pb-2.5 grid grid-cols-2 gap-2">
                     <div className="flex items-center border border-brand-300 rounded-lg overflow-hidden bg-brand-50/30 focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500">
                       <input
                         ref={inputRef}
@@ -182,7 +180,7 @@ export default function EventDropdown() {
                         value={eventValue}
                         onChange={handleNumericInput}
                         placeholder={option.inputPlaceholder}
-                        className="py-2 px-3 text-sm bg-transparent outline-none text-text-primary placeholder:text-text-muted"
+                        className="py-2 px-3 text-base leading-[1.4] bg-transparent outline-none text-text-primary placeholder:text-text-muted placeholder:text-base placeholder:leading-[1.4]"
                       />
                     </div>
 
@@ -197,9 +195,10 @@ export default function EventDropdown() {
                       >
                         <span
                           className={
-                            selectedDuration
+                            `text-base leading-[1.4] ${selectedDuration
                               ? "text-text-primary"
                               : "text-text-muted"
+                            }`
                           }
                         >
                           {selectedDuration?.label || "Select duration"}
@@ -217,7 +216,7 @@ export default function EventDropdown() {
                                 e.stopPropagation()
                                 dispatch(setEventDuration(dur.id))
                               }}
-                              className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 cursor-pointer transition-colors"
+                              className="w-full text-left px-3 py-2 text-base leading-[1.4] hover:bg-gray-50 cursor-pointer transition-colors"
                             >
                               {dur.label}
                             </button>
