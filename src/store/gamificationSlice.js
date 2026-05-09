@@ -110,6 +110,11 @@ const gamificationSlice = createSlice({
         state.eventDuration = state.eventSnapshot.eventDuration
         state.isEventSaved = true
         state.eventSnapshot = null
+      } else {
+        state.selectedEventId = null
+        state.eventValue = ""
+        state.eventDuration = null
+        state.isEventSaved = false
       }
       state.isEventDropdownOpen = false
       state.isDurationDropdownOpen = false
@@ -184,6 +189,11 @@ const gamificationSlice = createSlice({
         state.selectedTierId = state.rewardSnapshot.selectedTierId
         state.isRewardSaved = true
         state.rewardSnapshot = null
+      } else {
+        state.selectedRewardId = null
+        state.rewardValue = ""
+        state.selectedTierId = null
+        state.isRewardSaved = false
       }
       state.isRewardDropdownOpen = false
     },
